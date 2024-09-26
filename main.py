@@ -110,9 +110,9 @@ def draw_board():
         column = i % 4
         row = i // 4
         if row % 2 == 0:
-            pygame.draw.rect(screen, 'light grey', [600 - (column*200), (row * 100), 100, 100])
+            pygame.draw.rect(screen, 'dark grey', [600 - (column*200), (row * 100), 100, 100])
         else:
-            pygame.draw.rect(screen, 'light grey', [700 - (column*200), (row * 100), 100, 100])
+            pygame.draw.rect(screen, 'dark grey', [700 - (column*200), (row * 100), 100, 100])
         pygame.draw.rect(screen, 'gold', [0,800, WIDTH, 100])
         pygame.draw.rect(screen, 'red' ,[0,800, WIDTH, 100], 5)
         pygame.draw.rect(screen, 'gold' ,[800,0, 200, HEIGHT])
@@ -125,6 +125,21 @@ def draw_board():
             pygame.draw.line(screen, "black", (100 * i, 0),(100 * i, 800), 2)    
 
 
+#draw piecies onto a board
+def draw_pieces():
+    for i in range(len(white_pieces)):
+        index = pieces_list.index(white_pieces[i])
+        if white_pieces[i] == 'pawn' :
+         screen.blit(white_pawn, (white_locations[i][0] * 100 + 22 , white_locations[i][1] *100 + 30))
+        else :
+            screen.blit(white_images[index], (white_locations[i][0] * 100 + 10 , white_locations[i][1] *100 + 10))
+
+    for i in range(len(black_pieces)):
+        index = pieces_list.index(black_pieces[i])
+        if black_pieces[i] == 'pawn' :
+         screen.blit(black_pawn, (black_locations[i][0] * 100 + 22 , black_locations[i][1] * 100 + 30))
+        else :
+            screen.blit(black_images[index], (black_locations[i][0] * 100 + 10 , black_locations[i][1] *100 + 10))
 
 
 #main game loop
@@ -134,6 +149,7 @@ while run:
     timer.tick(fps)
     screen.fill('YELLOW')
     draw_board()
+    draw_pieces()
     
     
     #event handling
